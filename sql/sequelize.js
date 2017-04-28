@@ -1,3 +1,5 @@
+'use strict';
+
 const Sequelize = require('sequelize');
 const Route = require('../router/route.js');
 const cls = require('continuation-local-storage');

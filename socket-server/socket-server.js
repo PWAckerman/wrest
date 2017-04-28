@@ -1,5 +1,6 @@
-const WebSocket = require('ws');
+'use strict';
 
+const WebSocket = require('ws');
 
 class SocketServer{
     constructor(port, routes={}, auth, secure=false){

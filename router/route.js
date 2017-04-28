@@ -1,3 +1,5 @@
+'use strict'; 
+
 class Route{
     constructor(methods, queries, entity, auth, sockets=[]){
         this.methods = methods;

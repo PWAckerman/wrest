@@ -1,3 +1,5 @@
+'use strict';
+
 class Triggers{
     constructor(name){
         console.log(name);

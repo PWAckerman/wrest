@@ -1,3 +1,6 @@
+'use strict';
+
+
 module.exports = {
     INSERT: `CREATE OR REPLACE FUNCTION notify_trigger() RETURNS trigger AS $$
                         DECLARE
