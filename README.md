@@ -1,3 +1,4 @@
+[![NPM Version](http://img.shields.io/npm/v/object-settings.svg)](https://www.npmjs.org/package/wrest)
 # wREST
 RESTlike semantics over WebSockets (wREST)
 (a work in progress)
