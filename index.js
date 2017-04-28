@@ -1,3 +1,4 @@
+'use strict';
 const pg = require('pg');
 const q = require('q');
 const Sequelizer = require('./sql/sequelize.js').Sequelizer;
