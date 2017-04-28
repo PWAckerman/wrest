@@ -1,0 +1,28 @@
+version: "2"
+
+services:
+    wrest:
+        container_name: wrest
+        build:
+          context: .
+          dockerfile: .docker/wrest.dockerfile
+        ports:
+          - "9000:9000"
+        env_file:
+          - ./.docker/env/wrest.development.env
+        links:
+          - wrest_postgres
+        networks:
+          - wrest_network
+    wrest_postgres:
+        container_name: wrest_postgres
+        build:
+            context: .
+            dockerfile: .docker/postgres.dockerfile
+        ports:
+            - "5432:5432"
+        networks:
+          - wrest_network
+networks:
+    wrest_network:
+        driver: bridge
