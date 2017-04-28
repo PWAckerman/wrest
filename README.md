@@ -156,6 +156,12 @@ Authentication is _not_ enabled by default.
 
 Currently you will need to setup your own means of obtaining an authorization token or cookie, though that doesn't mean you couldn't necessarily do it over an unprotected Entity endpoint.
 
-##Encryption
+## Encryption
 A method to use `WSS` instead of `WS` is currently being worked on. Currently experimenting with self-signed certificates.
-    
+
+## Todos
+* Work on Encryption
+* Optimize broadcasting algorithm (use a hash table for mapping queries to sockets, rather than filter?)
+* Clean up code (SOLID)
+* Tests
+* Document API with jsDoc/ReadTheDocs
