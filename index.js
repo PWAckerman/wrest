@@ -82,4 +82,4 @@ class WrestServer{
     }
 }
 
-module.exports = WrestServer;
+module.exports = {Entity, WrestServer};
