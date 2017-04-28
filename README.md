@@ -1,4 +1,4 @@
-[![NPM Version](http://img.shields.io/npm/v/object-settings.svg)](https://www.npmjs.org/package/wrest)
+[![npm version](https://badge.fury.io/js/wrest.svg)](https://badge.fury.io/js/wrest)
 # wREST
 RESTlike semantics over WebSockets (wREST)
 (a work in progress)
