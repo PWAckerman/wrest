@@ -1,6 +1,6 @@
 {
   "name": "wrest",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "REST over WebSockets",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,13 @@
     "name": "Patrick Ackerman",
     "url": "https://github.com/PWAckerman"
   },
-  "keyword": ["Rest", "WebSockets", "ws", "firebase", "PostgreSQL"],
+  "keyword": [
+    "Rest",
+    "WebSockets",
+    "ws",
+    "firebase",
+    "PostgreSQL"
+  ],
   "bugs": {
     "url": "https://github.com/PWAckerman/wrest/issues"
   },
