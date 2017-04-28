@@ -1,2 +1,2 @@
 #!/bin/bash
-node index.js
+node ./test/startup.js

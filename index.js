@@ -1,42 +1,39 @@
-const tcp = require('net');
 const pg = require('pg');
 const q = require('q');
 const Sequelizer = require('./sql/sequelize.js').Sequelizer;
 const models = require('./sql/sequelize.js').models;
 const functions = require('./sql/functions.js');
-const httpParser = require('./http-parser/http-parser.js');
-const Response =  require('./http-parser/response.js');
-
-const pgConString = "postgres://wrest_web:dev@wrest_postgres:5432/wrest_api";
 
 const SocketServer = require('./socket-server/socket-server.js');
 
-let config = {
-    port: 9000,
-    dbUser: 'wrest_web',
-    dbPassword: 'dev',
-    dbHost: 'wrest_postgres',
-    dbName: 'wrest_api',
-    auth: (authentication, info)=>{
-        console.log(authentication.split(','));
-        return authentication.split(',')[1] === ' token'
-    }
-    // secure: {
-    //     keyPath: './wrest_network.key',
-    //     certPath: './wrest_network.cert'
-    // }
-}
+//Example Config
+// let config = {
+//     dbUser: 'wrest_web',
+//     dbPassword: 'dev',
+//     dbHost: 'wrest_postgres',
+//     dbName: 'wrest_api',
+//     auth: (authentication, info)=>{
+//         console.log(authentication.split(','));
+//         return authentication.split(',')[1] === ' token'
+//     }
+//     // secure: {
+//     //     keyPath: './wrest_network.key',
+//     //     certPath: './wrest_network.cert'
+//     // }
+// }
 
 class WrestServer{
 
     constructor(config, entities){
+        console.log('constructin!', config, entities);
         this.config = config;
         this.pgStringTemplate = `postgres://${config.dbUser}:${config.dbPassword}@${config.dbHost}:5432/${config.dbName}`
         this.entities = entities;
     }
 
-    listen(port){
+    listen(port, callback=()=>{}){
         let self = this;
+        console.log('listenin')
         pg.connect(this.pgStringTemplate, (err, client)=>{
           if(err) {
             console.log(err);
@@ -46,11 +43,14 @@ class WrestServer{
 
           Promise.all(triggerPromises)
               .then((allResults)=>{
-                  self.sequelizer = new Sequelizer(config, self.entities, client);
+                  console.log('sequelizin');
+                  self.sequelizer = new Sequelizer(self.config, self.entities, client);
 
                   self.sequelizer.promise.then(
                       (res)=>{
-                          self.socketServer = new SocketServer(port, self.sequelizer.routes, config.auth || false, config.secure || false);
+                          console.log('socket servin')
+                          self.socketServer = new SocketServer(port, self.sequelizer.routes, self.config.auth || false, self.config.secure || false);
+                          callback(port);
                       })
                   .catch((err)=>{
                       console.log(err);
@@ -58,11 +58,14 @@ class WrestServer{
               })
               .catch((err)=>{
                   //should not be able to get here
+                  console.log("you shouldn't be here");
+                  console.log(err);
               })
         });
     }
 
     _createTrigger(trigger, client){
+        console.log('triggerin')
         let dfd = q.defer();
         client.query(trigger, (err, res)=>{
             if(err){
@@ -78,6 +81,3 @@ class WrestServer{
 }
 
 module.exports = WrestServer;
-
-let wrestServer = new WrestServer(config, models);
-wrestServer.listen(9000);

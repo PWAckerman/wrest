@@ -161,7 +161,8 @@ A method to use `WSS` instead of `WS` is currently being worked on. Currently ex
 
 ## Todos
 * Work on Encryption
-* Optimize broadcasting algorithm (use a hash table for mapping queries to sockets, rather than filter?)
+* Optimize broadcasting algorithm (use a hash table for mapping queries to sockets, rather than naive filter?)
 * Clean up code (SOLID)
 * Tests
 * Document API with jsDoc/ReadTheDocs
+* Client side data structure library
