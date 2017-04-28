@@ -2,7 +2,7 @@
 const pg = require('pg');
 const q = require('q');
 const Sequelizer = require('./sql/sequelize.js').Sequelizer;
-const Entity = require('./sql/Entity.js');
+const Entity = require('./sql/entity.js');
 const models = require('./sql/sequelize.js').models;
 const functions = require('./sql/functions.js');
 

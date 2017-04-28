@@ -1,4 +1,4 @@
-'use strict'; 
+'use strict';
 
 class Route{
     constructor(methods, queries, entity, auth, sockets=[]){
@@ -7,6 +7,7 @@ class Route{
         this.entity = entity;
         this.sockets = sockets;
         this.auth = auth;
+        this.socketMap = {};
     }
 
     registerSocket(socket, queries, entityId=false){
@@ -18,14 +19,17 @@ class Route{
         }
         socket.queries = queries || {};
         this.sockets.push(socket);
+        //naively hash the query for quick access for the same queries
+        let naiveHash = JSON.stringify(queries);
+        this.socketMap[naiveHash] ? '' : this.socketMap[naiveHash] = [];
+        this.socketMap[naiveHash].push(socket);
         socket.on('message', function incoming(message) {
           message = JSON.parse(message);
           try {
              self[message.method](socket, message.body || {}, self.entity, message.queries || '');
-              }
-          catch(e){
+          } catch(e) {
                  socket.send(JSON.stringify({error: e}))
-             }
+          }
         });
         socket.on('close', (code, reason)=>{
             socket.terminate();

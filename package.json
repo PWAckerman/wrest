@@ -11,6 +11,7 @@
     "name": "Patrick Ackerman",
     "url": "https://github.com/PWAckerman"
   },
+  "keyword": ["Rest", "WebSockets", "ws", "firebase", "PostgreSQL"],
   "bugs": {
     "url": "https://github.com/PWAckerman/wrest/issues"
   },

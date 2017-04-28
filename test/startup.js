@@ -1,5 +1,19 @@
-const WrestServer = require('../index.js');
-const models = require('../sql/sequelize.js').models;
+const WrestServer = require('../index.js').WrestServer;
+const Entity = require('../index.js').Entity;
+const Sequelize = require('sequelize');
+
+const userModel = {
+        username: {
+	        type: Sequelize.STRING,
+	        allowNull: false
+        },
+        birthday: {
+	        type: Sequelize.DATE,
+	        allowNull: false
+	    }
+}
+
+const user = new Entity('user', userModel);
 
 let config = {
     port: 9000,
@@ -19,7 +33,7 @@ let config = {
 
 console.log('starting up!');
 
-const wrestServer = new WrestServer(config, models);
+const wrestServer = new WrestServer(config, [user]);
 
 wrestServer.listen(9000, (port)=>{
     console.log('listening on port ' + port);
