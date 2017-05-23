@@ -46,6 +46,14 @@ class SocketServer{
               entityId = parseIfInt(splitUrl[splitUrl.length - 1]);
               url = '/' + splitUrl[1];
           };
+          ws.isAlive = true;
+          if(!ws.pongListener){
+            ws.addEventListener("pong", ()=>{
+              console.log("you got ponged");
+              ws.isAlive = true;
+              ws.pongListener = true;
+            });
+          }
           if(query){
               queries = query.split('&').reduce(
                   (acc, queryTuple) => {
@@ -61,10 +69,9 @@ class SocketServer{
         this.interval = setInterval(function ping() {
           self.wss.clients.forEach(function each(ws) {
               if (ws.isAlive === false) return ws.terminate();
-
               ws.isAlive = false;
               ws.ping('', false, true);
-            });
+          });
           }, 30000);
     }
 }
