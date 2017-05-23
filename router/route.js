@@ -24,6 +24,7 @@ class Route{
         this.socketMap[naiveHash] ? '' : this.socketMap[naiveHash] = [];
         this.socketMap[naiveHash].push(socket);
         socket.on('message', function incoming(message) {
+          console.log(message);
           message = JSON.parse(message);
           try {
              self[message.method](socket, message.body || {}, self.entity, message.queries || '');

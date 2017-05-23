@@ -18,6 +18,7 @@ let defaultMethods = {
             queries = { raw : true }
         }
         entity.findAll(queries).then((results)=>{
+            console.log(results);
             socket.send(JSON.stringify({SELECT: results}));
         }).catch((err)=>{
             socket.send(JSON.stringify({error: err}))

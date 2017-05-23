@@ -12,6 +12,16 @@ services:
           - ./.docker/env/wrest.development.env
         links:
           - wrest_postgres
+          - wrest_redis
+        networks:
+          - wrest_network
+    wrest_redis:
+        container_name: wrest_redis
+        build:
+          context: .
+          dockerfile: .docker/redis.dockerfile
+        ports:
+          - "6379:6379"
         networks:
           - wrest_network
     wrest_postgres:

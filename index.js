@@ -5,8 +5,13 @@ const Sequelizer = require('./sql/sequelize.js').Sequelizer;
 const Entity = require('./sql/entity.js');
 const models = require('./sql/sequelize.js').models;
 const functions = require('./sql/functions.js');
+const do_it = require('./sql/redis-test/redis.js');
+
 
 const SocketServer = require('./socket-server/socket-server.js');
+
+do_it.do_it();
+
 
 //Example Config
 // let config = {
