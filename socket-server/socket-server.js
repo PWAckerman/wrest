@@ -59,7 +59,7 @@ class SocketServer{
           Object.keys(self.routes).includes(url) ? self.routes[url].registerSocket(ws, queries, entityId) : ws.close();
         });
       this.interval = setInterval(function ping() {
-        wss.clients.forEach(function each(ws) {
+        this.wss.clients.forEach(function each(ws) {
               if (ws.isAlive === false) return ws.terminate();
 
               ws.isAlive = false;
