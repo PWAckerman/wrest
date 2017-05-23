@@ -58,14 +58,14 @@ class SocketServer{
           console.log(url)
           Object.keys(self.routes).includes(url) ? self.routes[url].registerSocket(ws, queries, entityId) : ws.close();
         });
-      this.interval = setInterval(function ping() {
-        this.wss.clients.forEach(function each(ws) {
+        this.interval = setInterval(function ping() {
+          self.wss.clients.forEach(function each(ws) {
               if (ws.isAlive === false) return ws.terminate();
 
               ws.isAlive = false;
               ws.ping('', false, true);
             });
-         }, 30000);
+          }, 30000);
     }
 }
 
