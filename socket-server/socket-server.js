@@ -25,6 +25,7 @@ class SocketServer{
             this.wss = new WebSocket.Server({
                 port: port,
                 verifyClient: (info)=>{
+                    let entityId;
                     let authentication = info.req.headers['sec-websocket-protocol'];
                     let [url, query] = info.req.url.split('?');
                     let splitUrl = url.split('/');
